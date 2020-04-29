@@ -1,6 +1,6 @@
 # 硬盘随机覆盖工具 Disk random cover tool
 
-出售电脑前用随机数覆盖整个电脑硬盘
+出售电脑前用随机数覆盖整块硬盘
 
 To erase disk with random string when you selling old computers.
 
