@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 	"github.com/cheggaaa/pb"
-	"github.com/smcduck/xdsa/xrandom"
-	"github.com/smcduck/xdsa/xvolume"
-	"github.com/smcduck/xsys/xhdd"
-	"github.com/smcduck/xsys/xproc"
+	"github.com/shawnwyckoff/gpkg/container/grandom"
+	"github.com/shawnwyckoff/gpkg/container/gvolume"
+	"github.com/shawnwyckoff/gpkg/sys/ghdd"
+	"github.com/shawnwyckoff/gpkg/sys/gproc"
 	"os"
 )
 
 func main() {
 
-	_, _, mydir, err := xproc.SelfPath()
+	mydir, err := gproc.SelfDir()
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -25,7 +25,7 @@ func main() {
 	}
 	defer f.Close()
 
-	vi, err := xhdd.GetVolumeInfo(mydir)
+	vi, err := ghdd.GetVolumeInfo(mydir)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -34,7 +34,7 @@ func main() {
 	fmt.Println(vi.Available.String(), "[", vi.Available.MBytes(), " MB", "]", "disk space to erase")
 
 	MBs := int(vi.Available.MBytes())
-	OneMBString := xrandom.RandomString(int(xvolume.MB.Bytes()))
+	OneMBString := grandom.RandomString(int(gvolume.MB.Bytes()))
 	bar := pb.New(MBs)
 	bar.Start()
 	for i := 0; i < MBs; i++ {
